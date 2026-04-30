@@ -1,0 +1,29 @@
+.git
+.github
+.claude
+dist/
+
+# Provider binaries
+terraform-provider-clouding
+terraform-provider-clouding_*
+
+# Terraform state and secrets
+*.tfstate
+*.tfstate.backup
+**/.terraform/
+.terraform.lock.hcl
+*.tfvars
+*.tfvars.json
+crash.log
+
+# Test artifacts
+coverage.out
+coverage.html
+*.coverprofile
+cpu.prof
+mem.prof
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini

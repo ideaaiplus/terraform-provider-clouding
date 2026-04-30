@@ -1,0 +1,64 @@
+default_install_hook_types: [pre-commit, commit-msg, pre-push]
+default_stages: [pre-commit]
+
+repos:
+  # ── General file hygiene ──────────────────────────────────────────────────
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: trailing-whitespace
+        args: [--markdown-linebreak-ext=md]
+      - id: end-of-file-fixer
+      - id: check-yaml
+      - id: check-toml
+      - id: check-json
+      - id: check-merge-conflict
+      - id: check-added-large-files
+        args: [--maxkb=1024]
+      - id: no-commit-to-branch
+        args: [--branch, main]
+      - id: detect-private-key
+      - id: mixed-line-ending
+        args: [--fix=lf]
+
+  # ── Go: format + vet + tidy (fast, only on changed Go files) ─────────────
+  - repo: https://github.com/dnephin/pre-commit-golang
+    rev: v0.5.1
+    hooks:
+      - id: go-fmt
+      - id: go-vet
+      - id: go-mod-tidy
+
+  # ── golangci-lint (static analysis; auto-fixes when possible) ────────────
+  - repo: https://github.com/golangci/golangci-lint
+    rev: v2.11.4
+    hooks:
+      - id: golangci-lint
+        args: [--fix]
+
+  # ── Go: full build + test suite (pre-push only — slower) ─────────────────
+  - repo: local
+    hooks:
+      - id: go-build
+        name: go build
+        language: system
+        entry: go build -o /dev/null ./...
+        types: [go]
+        pass_filenames: false
+        stages: [pre-push]
+
+      - id: go-test
+        name: go test
+        language: system
+        entry: go test -count=1 ./...
+        types: [go]
+        pass_filenames: false
+        stages: [pre-push]
+
+  # ── Commit message: Conventional Commits ─────────────────────────────────
+  - repo: https://github.com/compilerla/conventional-pre-commit
+    rev: v4.4.0
+    hooks:
+      - id: conventional-pre-commit
+        stages: [commit-msg]
+        args: [feat, fix, docs, test, chore, refactor, ci]

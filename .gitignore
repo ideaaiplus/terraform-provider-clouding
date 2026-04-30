@@ -1,0 +1,73 @@
+# ──────────────────────────────────────────────
+# Provider binary
+# ──────────────────────────────────────────────
+terraform-provider-clouding
+terraform-provider-clouding_*
+
+# ──────────────────────────────────────────────
+# Go
+# ──────────────────────────────────────────────
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Go test / coverage artifacts
+coverage.out
+coverage.html
+*.coverprofile
+cpu.prof
+mem.prof
+
+# Go workspace (multi-module dev)
+go.work
+go.work.sum
+
+# ──────────────────────────────────────────────
+# GoReleaser
+# ──────────────────────────────────────────────
+dist/
+
+# ──────────────────────────────────────────────
+# Terraform
+# ──────────────────────────────────────────────
+**/.terraform/
+*.tfstate
+*.tfstate.backup
+*.tfvars
+*.tfvars.json
+.terraform.lock.hcl
+crash.log
+crash.*.log
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# ──────────────────────────────────────────────
+# Secrets / environment
+# ──────────────────────────────────────────────
+.env
+.env.*
+*.pem
+*.key
+
+# ──────────────────────────────────────────────
+# Editors
+# ──────────────────────────────────────────────
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.editorconfig.local
+
+# ──────────────────────────────────────────────
+# OS
+# ──────────────────────────────────────────────
+.DS_Store
+Thumbs.db
+desktop.ini
